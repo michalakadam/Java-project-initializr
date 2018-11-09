@@ -4,13 +4,16 @@ if [ -z "$*" ]
 	then echo "no arguments" 
 		exit 1
 fi
+#ask for project description
+read -p "Podaj krótki opis projektu: " description
+
 #create tree-like maven structure
 mkdir -p ~/IdeaProjects/"$*"/{src,test}/main/java
 #create files at src and test 
 touch ~/IdeaProjects/"$*"/{src/java/pl/michalak/adam/App.java,test/java/pl/michalak/adam/tests.java}
 cd ~/IdeaProjects/"$*"/
 #add minimal pom.xml
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/#APP/"pl.michalak.adam"/g | sed s/#NAME/"$1"/g | sed s/#DESC/"Jakiś projekt, który dorobi się później"/g > pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/"pl/michalak.adam"/g | sed s/#APP/"java.academy"/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g > pom.xml
 #create gitignore
 curl https://www.gitignore.io/api/java,intellij > .gitignore
 echo ".*iml" >> .gitignore
