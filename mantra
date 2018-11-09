@@ -25,14 +25,10 @@ cat >pom.xml<<EOF
          <description>#DESC</description>
  </project>
 EOF
-#add minimal gitignore file 
-cat >.gitignore<<EOF2
-#major cases for intellij IDEA
+#create gitignore
+curl https://www.gitignore.io/api/java,intellij > .gitignore
 
-*.iml
-*.xml
 
-EOF2
 
 
 
