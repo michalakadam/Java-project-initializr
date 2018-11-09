@@ -5,11 +5,11 @@ if [ -z "$*" ]
 		exit 1
 fi
 #create tree-like maven structure
-mkdir -p "$*"/{src,test}/main/java
+mkdir -p ~/IdeaProjects/"$*"/{src,test}/main/java
 #create files at src and test 
-touch "$*"/{src/main/java/App.java,test/main/java/tests.java}
+touch ~/IdeaProjects/"$*"/{src/main/java/App.java,test/main/java/tests.java}
 #add minimal pom.xml
-cd "$*"
+cd ~/IdeaProjects/"$*"/
 cat >pom.xml<<EOF
 <?xml version=1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -27,7 +27,7 @@ cat >pom.xml<<EOF
 EOF
 #create gitignore
 curl https://www.gitignore.io/api/java,intellij > .gitignore
-
+echo ".*iml" >> .gitignore
 
 
 
