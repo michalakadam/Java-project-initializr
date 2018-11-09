@@ -7,24 +7,10 @@ fi
 #create tree-like maven structure
 mkdir -p ~/IdeaProjects/"$*"/{src,test}/main/java
 #create files at src and test 
-touch ~/IdeaProjects/"$*"/{src/main/java/App.java,test/main/java/tests.java}
-#add minimal pom.xml
+touch ~/IdeaProjects/"$*"/{src/java/pl/michalak/adam/App.java,test/java/pl/michalak/adam/tests.java}
 cd ~/IdeaProjects/"$*"/
-cat >pom.xml<<EOF
-<?xml version=1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-        http://maven.apache.org/xsd/maven-4.0.0.xsd">
-         <modelVersion>4.0.0</modelVersion>
- 
-         <groupId>com.mycompany.app</groupId>
-         <artifactId>my-app</artifactId>
-         <version>1.0-SNAPSHOT</version>
-         <name>#NAME</name> 
-         <description>#DESC</description>
- </project>
-EOF
+#add minimal pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/#APP/"pl.michalak.adam"/g | sed s/#NAME/"$1"/g | sed s/#DESC/"Jakiś projekt, który dorobi się później"/g > pom.xml
 #create gitignore
 curl https://www.gitignore.io/api/java,intellij > .gitignore
 echo ".*iml" >> .gitignore
