@@ -42,8 +42,8 @@ curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6
 curl https://www.gitignore.io/api/java,intellij > .gitignore
 echo ".*iml" >> .gitignore
 
-
-
+#Initialize empty git repository in the project's folder
+git init
 
 
 
