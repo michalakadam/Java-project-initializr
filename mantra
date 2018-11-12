@@ -36,7 +36,7 @@ read -p "Podaj krótki opis projektu: " description
 
 #add minimal pom.xml
 set +x
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/java.academy/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g > pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/java.academy/g | sed s/#NAME/"$*"/g | sed s/#DESC/"$description"/g > pom.xml
 #create gitignore
 
 curl https://www.gitignore.io/api/java,intellij > .gitignore
@@ -44,6 +44,14 @@ echo ".*iml" >> .gitignore
 
 #Initialize empty git repository in the project's folder
 git init
+
+#Add empty readme.md file with a project name
+touch README.md
+echo "${*^^}" >> README.md
+cat <<-EOF >> README.md
+
+$description
+EOF
 
 
 
