@@ -13,10 +13,14 @@ touch ~/IdeaProjects/"$*"/src/{main/java/pl/michalak/adam/App.java,test/java/pl/
 cd ~/IdeaProjects/"$*"/
 
 #add staff to App.java and AppTest.java
-cat <<-EOF > ~/IdeaProjects/"$*"/src/main/java/pl/michalak/adam/App.java
+cat <<-EOF > ~/IdeaProjects/"$*"/src/main/java/pl/michalak/adam/$*.java
 package pl.michalak.adam;
-
-class App{
+/**
+ * Główna klasa programu
+ *
+ * @author Adam Michalak
+ */
+class $*{
 public static void main(String[] args) {
 
 }
@@ -37,12 +41,21 @@ echo ".*iml" >> .gitignore
 #Initialize empty git repository in the project's folder
 git init
 
-#Add empty readme.md file with a project name
+#Add readme.md file with a project name and description
 touch README.md
-echo "${*^^}" >> README.md
+#echo "${*^^}" >> README.md
 cat <<-EOF >> README.md
+${*^^}
 
 $description
+EOF
+
+#Add estymaty.md for future goal specification
+cat <<-EOF >> estymaty.md
+# $*
+
+|Data  |Pesymistyczna|Realistyczna|Optymistyczna|
+:-------------------:|:-------------------:|:-------------------|-------------------:
 EOF
 
 #Enable user to add remote repository
