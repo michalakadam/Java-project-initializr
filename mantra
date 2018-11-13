@@ -23,14 +23,6 @@ public static void main(String[] args) {
 }
 EOF
 
-cat <<-EOF > ~/IdeaProjects/"$*"/src/test/java/pl/michalak/adam/AppTest.java
-package pl.michalak.adam;
-
-class AppTest{
-
-}
-EOF
-
 #ask for project description
 read -p "Podaj krótki opis projektu: " description
 
