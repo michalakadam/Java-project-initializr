@@ -45,8 +45,13 @@ cat <<-EOF >> README.md
 $description
 EOF
 
-
-
+#Enable user to add remote repository
+read -p "Do you want to track remote repository?[Y/n] " repoAnswer
+if [ $repoAnswer = "Y" ]
+then 
+read -p "Feed me with link to the repository: " repoLink 
+git remote add origin $repoLink
+fi
 
 
 
