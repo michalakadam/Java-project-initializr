@@ -9,7 +9,7 @@ fi
 mkdir -p ~/IdeaProjects/"$*"/src/{main,test}/java/pl/michalak/adam
 
 #create files at src and test 
-touch ~/IdeaProjects/"$*"/src/{main/java/pl/michalak/adam/App.java,test/java/pl/michalak/adam/AppTest.java}
+touch ~/IdeaProjects/"$*"/src/{main/java/pl/michalak/adam/$*.java,test/java/pl/michalak/adam/$*Test.java}
 cd ~/IdeaProjects/"$*"/
 
 #add staff to App.java and AppTest.java
@@ -60,11 +60,12 @@ EOF
 
 #Enable user to add remote repository
 read -p "Do you want to track remote repository?[Y/n] " repoAnswer
-if [ $repoAnswer = "Y" ]
+if [ "$repoAnswer" = "Y" ] || [ "$repoAnswer" = "" ]
 then 
 read -p "Feed me with link to the repository: " repoLink 
 git remote add origin $repoLink
 fi
 
-
+#recompile pom.xml and create target folder
+mvn clean install compile
 
