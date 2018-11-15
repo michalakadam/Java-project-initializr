@@ -32,7 +32,7 @@ read -p "Podaj krótki opis projektu: " description
 
 #add minimal pom.xml
 set +x
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/java.academy/g | sed s/#NAME/"$*"/g | sed s/#DESC/"$description"/g | sed s/#FQN of your MainClass/"pl.michalak.adam.$*"/g > pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/java.academy/g | sed s/#NAME/"$*"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"https://git.epam.com/Adam_Michalak"/g | sed s/#FQN of your MainClass/"pl.michalak.adam.$*"/g > pom.xml
 #create gitignore
 
 curl https://www.gitignore.io/api/java,intellij > .gitignore
