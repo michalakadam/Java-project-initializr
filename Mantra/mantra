@@ -1,26 +1,26 @@
 #!/bin/bash
 
-if [ -z "$*" ]
+if [ -z "$1" ]
 	then echo "no arguments" 
 		exit 1
 fi
 
 #create tree-like maven structure
-mkdir -p ~/IdeaProjects/"$*"/src/{main,test}/java/pl/michalak/adam
+mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam
 
 #create files at src and test 
-touch ~/IdeaProjects/"$*"/src/{main/java/pl/michalak/adam/$*.java,test/java/pl/michalak/adam/$*Test.java}
-cd ~/IdeaProjects/"$*"/
+touch ~/IdeaProjects/"$1"/src/{main/java/pl/michalak/adam/$1.java,test/java/pl/michalak/adam/$1Test.java}
+cd ~/IdeaProjects/"$1"/
 
 #add staff to App.java and AppTest.java
-cat <<-EOF > ~/IdeaProjects/"$*"/src/main/java/pl/michalak/adam/$*.java
+cat <<-EOF > ~/IdeaProjects/"$1"/src/main/java/pl/michalak/adam/$1.java
 package pl.michalak.adam;
 /**
  * Główna klasa programu
  *
  * @author Adam Michalak
  */
-class $* {
+class $1 {
 public static void main(String[] args) {
 
     }
@@ -32,7 +32,7 @@ read -p "Podaj krótki opis projektu: " description
 
 #add minimal pom.xml
 set +x
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/java.academy/g | sed s/#NAME/"$*"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"git.epam.com\/Adam_Michalak"/g > pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/java.academy/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"git.epam.com\/Adam_Michalak"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$1/g > pom.xml
 
 #create gitignore
 
@@ -48,14 +48,14 @@ git init
 touch README.md
 #echo "${*^^}" >> README.md
 cat <<-EOF >> README.md
-${*^^}
+${1^^}
 
 $description
 EOF
 
 #Add estymaty.md for future goal specification
 cat <<-EOF >> estymaty.md
-# $*
+# $1
 #
 # $description
 |Data  |Pesymistyczna|Realistyczna|Optymistyczna|
