@@ -76,6 +76,10 @@ read -p "Feed me with link to the repository: (press q to quit) " repoLink
     fi
 fi
 
+#Initial commit
+git add .
+git commit -m "Initial commit with pom, readme and git repo initialized"
+
 #recompile pom.xml and create target folder
 mvn clean install compile
 
