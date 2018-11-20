@@ -81,5 +81,7 @@ git add .
 git commit -m "Initial commit with pom, readme and git repo initialized"
 
 #recompile pom.xml and create target folder
-mvn clean install compile
+mvn install
+
+//snap/intellij-idea-community/95/bin/idea.sh pom.xml &
 
