@@ -32,7 +32,7 @@ read -p "Podaj krótki opis projektu: " description
 
 #add minimal pom.xml
 set +x
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$1.java.academy/g | sed s/0.1/1.0/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"git.epam.com\/Adam_Michalak"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$1/g > pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$1.java.academy/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"git.epam.com\/Adam_Michalak"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$1/g > pom.xml
 
 #create gitignore
 
@@ -64,10 +64,16 @@ EOF
 
 #Enable user to add remote repository
 read -p "Do you want to track remote repository?[Y/n] " repoAnswer
-if [ "$repoAnswer" = "Y" ] || [ "$repoAnswer" = "" ]
+if [ "$repoAnswer" = "Y" ] || [ "$repoAnswer" = "y" ] || [ "$repoAnswer" = "" ]
 then 
-read -p "Feed me with link to the repository: " repoLink 
-git remote add origin $repoLink
+read -p "Feed me with link to the repository: (press q to quit) " repoLink
+    #enable user to quit here
+    if [ "$repoLink" = "q" ]
+    then
+    echo "Quitting connection to remote repository"
+    else
+    git remote add origin $repoLink
+    fi
 fi
 
 #recompile pom.xml and create target folder
