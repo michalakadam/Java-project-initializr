@@ -37,7 +37,7 @@ curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6
 #create gitignore
 
 curl https://www.gitignore.io/api/java,intellij > .gitignore
-echo ".*iml" >> .gitignore
+echo "*.iml" >> .gitignore
 echo "target/" >> .gitignore
 echo ".idea/" >> .gitignore
 
@@ -83,5 +83,4 @@ git commit -m "Initial commit with pom, readme and git repo initialized"
 #recompile pom.xml and create target folder
 mvn install
 
-//snap/intellij-idea-community/95/bin/idea.sh pom.xml &
-
+//snap/intellij-idea-community/95/bin/idea.sh pom.xml & 
