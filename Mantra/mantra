@@ -48,9 +48,9 @@ git init
 touch README.md
 #echo "${*^^}" >> README.md
 cat <<-EOF >> README.md
-${1^^}
+# ${1^^}
 
-$description
+##### $description
 EOF
 
 #Add estymaty.md for future goal specification
