@@ -6,10 +6,10 @@ if [ -z "$1" ]
 fi
 
 #create tree-like maven structure
-mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam
+mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam/"$1"
 
 #create files at src and test 
-touch ~/IdeaProjects/"$1"/src/{main/java/pl/michalak/adam/$1.java,test/java/pl/michalak/adam/$1Test.java}
+touch ~/IdeaProjects/"$1"/src/main/java/pl/michalak/adam/"$1"/Main.java
 cd ~/IdeaProjects/"$1"/
 
 #add staff to App.java and AppTest.java
