@@ -77,6 +77,7 @@ read -p "Feed me with link to the repository: (press q to quit) " repoLink
 fi
 
 #Initial commit
+git checkout -b development
 git add .
 git commit -m "Initial commit with pom, readme and git repo initialized"
 
