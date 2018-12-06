@@ -6,10 +6,10 @@ if [ -z "$1" ]
 fi
 
 #create tree-like maven structure
-mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam/"$1"
+mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam/"${1,,}"
 
 #create files at src and test 
-touch ~/IdeaProjects/"$1"/src/main/java/pl/michalak/adam/"$1"/Main.java
+touch ~/IdeaProjects/"$1"/src/main/java/pl/michalak/adam/"${1,,}"/Main.java
 cd ~/IdeaProjects/"$1"/
 
 #add staff to App.java and AppTest.java
@@ -35,11 +35,13 @@ set +x
 curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$1.java.academy/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"git.epam.com\/Adam_Michalak"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$1/g > pom.xml
 
 #create gitignore
-
 curl https://www.gitignore.io/api/java,intellij > .gitignore
 echo "*.iml" >> .gitignore
 echo "target/" >> .gitignore
 echo ".idea/" >> .gitignore
+
+#create mailmap
+echo "Adam Michalak <adam_michalak@epam.com>" > .mailmap
 
 #Initialize empty git repository in the project's folder
 git init
@@ -84,4 +86,9 @@ git commit -m "Initial commit with pom, readme and git repo initialized"
 #recompile pom.xml and create target folder
 mvn install
 
-//snap/intellij-idea-community/95/bin/idea.sh pom.xml & 
+#Open project in Intellij IDEA
+read -p "Do you want to open this project in Intellij?[Y/n] " ideAnswer
+    if [ "$ideAnswer" = "Y" ] || [ "$ideAnswer" = "y" ] || [ "$ideAnswer" = "" ]
+    then
+    //snap/intellij-idea-community/95/bin/idea.sh pom.xml & 
+fi
