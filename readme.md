@@ -6,3 +6,8 @@
 
 Go to the script directory and type ./mantra project_name<br/> 
 Then follow instructions in the terminal.
+
+### To-do
+* add testNG to dependencies
+* .gitattributes
+* precommit githook
