@@ -15,7 +15,7 @@ cd ~/IdeaProjects/"$1"/
 cat <<-EOF > ~/IdeaProjects/"$1"/src/main/java/pl/michalak/adam/$1.java
 package pl.michalak.adam;
 /**
- * Główna klasa programu
+ * Main class of $1 application
  *
  * @author Adam Michalak
  */
@@ -27,11 +27,11 @@ public static void main(String[] args) {
 EOF
 
 #ask for project description
-read -p "Podaj krótki opis projektu: " description
+read -p "Feed me short project description: " description
 
 #add minimal pom.xml
 set +x
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$1.java.academy/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"git.epam.com\/Adam_Michalak"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$1/g > pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$1/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"github.com\/michalakadam"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$1/g > pom.xml
 
 #create gitignore
 curl https://www.gitignore.io/api/java,intellij > .gitignore
@@ -40,7 +40,7 @@ echo "target/" >> .gitignore
 echo ".idea/" >> .gitignore
 
 #create mailmap
-echo "Adam Michalak <adam_michalak@epam.com>" > .mailmap
+echo "Adam Michalak <adam.michalak.dev@gmail.com>" > .mailmap
 
 #Initialize empty git repository in the project's folder
 git init
@@ -54,13 +54,13 @@ cat <<-EOF >> README.md
 ##### $description
 EOF
 
-#Add estymaty.md for future goal specification
-cat <<-EOF >> estymaty.md
+#Add estimates.md for future goal specification
+cat <<-EOF >> estimates.md
 # $1
 #
 # $description
-|Data  |Pesymistyczna|Realistyczna|Optymistyczna|
-:-------------------:|:-------------------:|:-------------------|-------------------:
+|Date  |Pesimistic|Realistic|Optimistic|
+:-----:|:--------:|:--------|----------:
 EOF
 
 #Enable user to add remote repository
@@ -91,3 +91,5 @@ read -p "Do you want to open this project in Intellij?[Y/n] " ideAnswer
     then
     //snap/intellij-idea-community/95/bin/idea.sh pom.xml & 
 fi
+
+echo "NEW PROJECT INITIALIZED SUCCESSFULLY"
