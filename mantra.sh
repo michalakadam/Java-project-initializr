@@ -1,12 +1,19 @@
 #!/bin/bash
 
-if [ -z "$1" ]
-	then echo "no arguments" 
-		exit 1
-fi
+correctInputFlag=0
+while [[ "$correctInputFlag" -eq 0 ]]
+do
+    read -p "Name of the project: " projectName
+    if [[ -z "$projectName" ]]
+        then
+        echo "No arguments, try again."
+        else
+        correctInputFlag=$(( correctInputFlag+1 ))
+    fi
+done
 
 #create tree-like maven structure
-mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam/"${1,,}"
+mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam/"${1}"
 mkdir -p ~IdeaProjects/"$1"/src/main/resources
 
 cd ~/IdeaProjects/"$1"/
