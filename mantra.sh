@@ -12,33 +12,38 @@ do
     fi
 done
 
-#create tree-like maven structure
-mkdir -p ~/IdeaProjects/"$1"/src/{main,test}/java/pl/michalak/adam/"${1}"
-mkdir -p ~IdeaProjects/"$1"/src/main/resources
+#ask for project description
+read -p "Feed me short project description: " description
 
-cd ~/IdeaProjects/"$1"/
+#create tree-like maven structure
+mkdir -p ~/IdeaProjects/"$projectName"/src/{main,test}/java/pl/michalak/adam/"${projectName}"
+mkdir -p ~IdeaProjects/"$projectName"/src/main/resources
+
+#Add estimates.md for future goal specification
+now=$(date +"%d-%m-%Y")
+sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/Today/$now/g" ./estimates_template.md > ~/IdeaProjects/"$projectName"/estimates.md
+
+#Move to project directory
+cd ~/IdeaProjects/"$projectName"/
 
 #add staff to App.java and AppTest.java
-cat <<-EOF > ~/IdeaProjects/"$1"/src/main/java/pl/michalak/adam/$1.java
+cat <<-EOF > ~/IdeaProjects/"$projectName"/src/main/java/pl/michalak/adam/$projectName.java
 package pl.michalak.adam;
 /**
- * Main class of $1 application
+ * Main class of $projectName application
  *
  * @author Adam Michalak
  */
-class $1 {
+class $projectName {
 public static void main(String[] args) {
 
     }
 }
 EOF
 
-#ask for project description
-read -p "Feed me short project description: " description
-
 #add minimal pom.xml
 set +x
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$1/g | sed s/#NAME/"$1"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"github.com\/michalakadam"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$1/g > pom.xml
+curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$projectName/g | sed s/#NAME/"$projectName"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"github.com\/michalakadam"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$projectName/g > pom.xml
 
 #create gitignore
 curl https://www.gitignore.io/api/java,intellij > .gitignore
@@ -56,18 +61,9 @@ git init
 touch README.md
 #echo "${*^^}" >> README.md
 cat <<-EOF >> README.md
-# ${1^^}
+# ${projectName^^}
 
 ##### $description
-EOF
-
-#Add estimates.md for future goal specification
-cat <<-EOF >> estimates.md
-# $1
-#
-# $description
-|Date  |Pesimistic|Realistic|Optimistic|
-:-----:|:--------:|:--------|----------:
 EOF
 
 #Enable user to add remote repository
