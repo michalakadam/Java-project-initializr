@@ -1,9 +1,10 @@
 #!/bin/bash
 
 #DEFAULT VALUES
-author=Adam Michalak
-mail=adam.michalak.dev@gmail.com
-group=dev.michalak.adam
+projectsDirectory=~/IdeaProjects
+author="Adam Michalak"
+mail="adam.michalak.dev@gmail.com"
+group="dev.michalak.adam"
 
 #ask for project name
 correctInputFlag=0
@@ -18,19 +19,27 @@ do
     fi
 done
 
-#ask for project description
-read -p "Feed me short project description: " description
+#create project folder if it does not already exist
+if [[ -d "$projectsDirectory"/"$projectName" ]]
+    then
+    echo "Project with such a name already exist. Terminating..."
+    exit 1
+    else
+    mkdir -p "$projectsDirectory"/"$projectName"
+fi
 
-#create tree-like maven structure
-mkdir -p ~/IdeaProjects/"$projectName"/src/{main,test}/java/dev/michalak/adam/"${projectName}"
-mkdir -p ~IdeaProjects/"$projectName"/src/main/resources
+read -p "Feed me short project description: " description
 
 #Add estimates.md for future goal specification
 now=$(date +"%d-%m-%Y")
-sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/Today/$now/g" ./templates/estimates > ~/IdeaProjects/"$projectName"/estimates.md
+sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/Today/$now/g" ./templates/estimates > "$projectsDirectory"/"$projectName"/estimates.md
 
 #Move to project directory
-cd ~/IdeaProjects/"$projectName"/
+cd "$projectsDirectory"/"$projectName"/
+
+#create tree-like maven structure
+mkdir -p ./src/{main,test}/java/dev/michalak/adam/"${projectName}"
+mkdir -p ./src/main/resources
 
 #add staff to App.java and AppTest.java
 cat <<-EOF > ~/IdeaProjects/"$projectName"/src/main/java/pl/michalak/adam/$projectName.java
@@ -75,7 +84,7 @@ EOF
 #Enable user to add remote repository
 read -p "Do you want to track remote repository?[Y/n] " repoAnswer
 if [ "$repoAnswer" = "Y" ] || [ "$repoAnswer" = "y" ] || [ "$repoAnswer" = "" ]
-then 
+then
 read -p "Feed me with link to the repository: (press q to quit) " repoLink
     #enable user to quit here
     if [ "$repoLink" = "q" ]
@@ -98,7 +107,7 @@ mvn install
 read -p "Do you want to open this project in Intellij?[Y/n] " ideAnswer
     if [ "$ideAnswer" = "Y" ] || [ "$ideAnswer" = "y" ] || [ "$ideAnswer" = "" ]
     then
-    //snap/intellij-idea-community/95/bin/idea.sh pom.xml & 
+    //snap/intellij-idea-community/95/bin/idea.sh pom.xml &
 fi
 
 echo "NEW PROJECT INITIALIZED SUCCESSFULLY"
