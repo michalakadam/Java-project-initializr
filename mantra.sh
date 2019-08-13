@@ -86,7 +86,7 @@ fi
 
 #Initial commit
 git add .
-git commit -m "Initial commit with pom, readme and git repo initialized"
+git commit -m "initial commit with project template generated"
 git checkout -b development
 
 #recompile pom.xml and create target folder
