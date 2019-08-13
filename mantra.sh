@@ -27,7 +27,7 @@ mkdir -p ~IdeaProjects/"$projectName"/src/main/resources
 
 #Add estimates.md for future goal specification
 now=$(date +"%d-%m-%Y")
-sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/Today/$now/g" ./estimates_template.md > ~/IdeaProjects/"$projectName"/estimates.md
+sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/Today/$now/g" ./templates/estimates > ~/IdeaProjects/"$projectName"/estimates.md
 
 #Move to project directory
 cd ~/IdeaProjects/"$projectName"/
