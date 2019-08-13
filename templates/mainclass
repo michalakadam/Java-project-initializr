@@ -1,0 +1,11 @@
+package PACKAGE_NAME;
+/**
+ * Main class of PROJECT_NAME application
+ *
+ * @author AUTHOR_NAME
+ */
+class PROJECT_NAME {
+public static void main(String[] args) {
+
+    }
+}

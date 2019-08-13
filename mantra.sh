@@ -30,6 +30,13 @@ fi
 
 read -p "Feed me short project description: " description
 
+#create tree-like maven structure
+mkdir -p "$projectsDirectory"/"$projectName"/src/{main,test}/java/dev/michalak/adam/"${projectName}"
+mkdir -p "$projectsDirectory"/"$projectName"/src/main/resources
+
+#add template main class of the program
+sed -e "s/PACKAGE_NAME/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/AUTHOR_NAME/$author/g" ./templates/mainclass > "$projectsDirectory"/"$projectName"/src/main/java/dev/michalak/adam/$projectName.java
+
 #Add estimates.md for future goal specification
 now=$(date +"%d-%m-%Y")
 sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/Today/$now/g" ./templates/estimates > "$projectsDirectory"/"$projectName"/estimates.md
@@ -37,24 +44,6 @@ sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/To
 #Move to project directory
 cd "$projectsDirectory"/"$projectName"/
 
-#create tree-like maven structure
-mkdir -p ./src/{main,test}/java/dev/michalak/adam/"${projectName}"
-mkdir -p ./src/main/resources
-
-#add staff to App.java and AppTest.java
-cat <<-EOF > ~/IdeaProjects/"$projectName"/src/main/java/pl/michalak/adam/$projectName.java
-package pl.michalak.adam;
-/**
- * Main class of $projectName application
- *
- * @author Adam Michalak
- */
-class $projectName {
-public static void main(String[] args) {
-
-    }
-}
-EOF
 
 #add minimal pom.xml
 set +x
