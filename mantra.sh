@@ -4,7 +4,7 @@
 projectsDirectory=~/IdeaProjects
 author="Adam Michalak"
 mail="adam.michalak.dev@gmail.com"
-url="github.com\/michalakadam"
+repoUrl="github.com\/michalakadam"
 group="dev.michalak.adam"
 groupProjectDirectory="dev/michalak/adam"
 
@@ -37,10 +37,13 @@ mkdir -p "$projectsDirectory"/"$projectName"/src/{main,test}/java/"$groupProject
 mkdir -p "$projectsDirectory"/"$projectName"/src/main/resources
 
 #add minimal pom.xml
-sed -e "s/GROUP_ID/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/PROJECT_DESCRIPTION/$description/g" -e "s/GROUP_URL/$url/g" -e "s/MAIN_CLASS_PATH/$group\.$projectName/g" ./templates/pom > "$projectsDirectory"/"$projectName"/pom.xml
+sed -e "s/GROUP_ID/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/PROJECT_DESCRIPTION/$description/g" -e "s/GROUP_URL/$repoUrl/g" -e "s/MAIN_CLASS_PATH/$group\.$projectName/g" ./templates/pom > "$projectsDirectory"/"$projectName"/pom.xml
 
 #add template main class of the program
 sed -e "s/PACKAGE_NAME/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/AUTHOR_NAME/$author/g" ./templates/mainclass > "$projectsDirectory"/"$projectName"/src/main/java/"$groupProjectDirectory"/$projectName.java
+
+#Add readme.md file template
+sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/REPO_URL/$repoUrl/g" -e "s/MAIL/$mail/g" ./templates/readme > "$projectsDirectory"/"$projectName"/README.md
 
 #Add estimates.md for future goal specification
 now=$(date +"%d-%m-%Y")
@@ -60,15 +63,6 @@ echo "$author <$mail>" > .mailmap
 
 #Initialize empty git repository in the project's folder
 git init
-
-#Add readme.md file with a project name and description
-touch README.md
-#echo "${*^^}" >> README.md
-cat <<-EOF >> README.md
-# ${projectName^^}
-
-##### $description
-EOF
 
 #Enable user to add remote repository
 read -p "Do you want to track remote repository?[Y/n] " repoAnswer
