@@ -49,7 +49,10 @@ sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/R
 now=$(date +"%d-%m-%Y")
 sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/DATE_TODAY/$now/g" ./templates/estimates > "$projectsDirectory"/"$projectName"/estimates.md
 
-#Move to project directory
+#copy precommit to project folder for further processing
+cp ./templates/precommit "$projectsDirectory"/"$projectName"/precommit
+
+#Navigate to project directory
 cd "$projectsDirectory"/"$projectName"/
 
 #create gitignore
@@ -63,6 +66,10 @@ echo "$author <$mail>" > .mailmap
 
 #Initialize empty git repository in the project's folder
 git init
+
+#add git precommit hook in git repository
+rm .git/hooks/pre-commit.sample
+mv ./precommit .git/hooks/pre-commit
 
 #Enable user to add remote repository
 read -p "Do you want to track remote repository?[Y/n] " repoAnswer
@@ -93,4 +100,4 @@ read -p "Do you want to open this project in Intellij?[Y/n] " ideAnswer
     //snap/intellij-idea-community/95/bin/idea.sh pom.xml &
 fi
 
-echo "NEW PROJECT INITIALIZED SUCCESSFULLY"
+printf "\nNEW PROJECT INITIALIZED SUCCESSFULLY"
