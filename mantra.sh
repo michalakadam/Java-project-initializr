@@ -56,7 +56,7 @@ echo "target/" >> .gitignore
 echo ".idea/" >> .gitignore
 
 #create mailmap
-echo "Adam Michalak <adam.michalak.dev@gmail.com>" > .mailmap
+echo "$author <$mail>" > .mailmap
 
 #Initialize empty git repository in the project's folder
 git init
