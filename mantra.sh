@@ -5,6 +5,7 @@ projectsDirectory=~/IdeaProjects
 author="Adam Michalak"
 mail="adam.michalak.dev@gmail.com"
 group="dev.michalak.adam"
+groupProjectDirectory="dev/michalak/adam"
 
 #ask for project name
 correctInputFlag=0
@@ -31,11 +32,11 @@ fi
 read -p "Feed me short project description: " description
 
 #create tree-like maven structure
-mkdir -p "$projectsDirectory"/"$projectName"/src/{main,test}/java/dev/michalak/adam/"${projectName}"
+mkdir -p "$projectsDirectory"/"$projectName"/src/{main,test}/java/"$groupProjectDirectory"/"${projectName}"
 mkdir -p "$projectsDirectory"/"$projectName"/src/main/resources
 
 #add template main class of the program
-sed -e "s/PACKAGE_NAME/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/AUTHOR_NAME/$author/g" ./templates/mainclass > "$projectsDirectory"/"$projectName"/src/main/java/dev/michalak/adam/$projectName.java
+sed -e "s/PACKAGE_NAME/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/AUTHOR_NAME/$author/g" ./templates/mainclass > "$projectsDirectory"/"$projectName"/src/main/java/"$groupProjectDirectory"/$projectName.java
 
 #Add estimates.md for future goal specification
 now=$(date +"%d-%m-%Y")
