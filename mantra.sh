@@ -52,9 +52,6 @@ now=$(date +"%d-%m-%Y")
 sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/DATE_TODAY/$now/g" ./templates/estimates > "$projectsDirectory"/"$projectName"/estimates.md
 printf "Adding estimates... DONE.\n"
 
-#copy precommit to project folder for further processing
-cp ./templates/precommit "$projectsDirectory"/"$projectName"/precommit
-
 #Navigate to project directory
 cd "$projectsDirectory"/"$projectName"/
 
@@ -74,7 +71,7 @@ git init
 
 #add git precommit hook in git repository
 rm .git/hooks/pre-commit.sample
-mv ./precommit .git/hooks/pre-commit
+curl https://raw.githubusercontent.com/michalakadam/GitHook/master/precommit.sh > .git/hooks/pre-commit
 printf "Adding precommit hook to repository... DONE.\n"
 
 #Enable user to add remote repository
