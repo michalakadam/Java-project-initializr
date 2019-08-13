@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#DEFAULT VALUES
+author=Adam Michalak
+mail=adam.michalak.dev@gmail.com
+group=dev.michalak.adam
+
+#ask for project name
 correctInputFlag=0
 while [[ "$correctInputFlag" -eq 0 ]]
 do
@@ -16,7 +22,7 @@ done
 read -p "Feed me short project description: " description
 
 #create tree-like maven structure
-mkdir -p ~/IdeaProjects/"$projectName"/src/{main,test}/java/pl/michalak/adam/"${projectName}"
+mkdir -p ~/IdeaProjects/"$projectName"/src/{main,test}/java/dev/michalak/adam/"${projectName}"
 mkdir -p ~IdeaProjects/"$projectName"/src/main/resources
 
 #Add estimates.md for future goal specification
