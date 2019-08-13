@@ -10,23 +10,20 @@ groupProjectDirectory="dev/michalak/adam"
 
 #ask for project name
 correctInputFlag=0
-while [[ "$correctInputFlag" -eq 0 ]]
-do
+while [[ "$correctInputFlag" -eq 0 ]]; do
     read -p "Name of the project: " projectName
-    if [[ -z "$projectName" ]]
-        then
+    if [[ -z "$projectName" ]]; then
         echo "No arguments, try again."
-        else
+    else
         correctInputFlag=$(( correctInputFlag+1 ))
     fi
 done
 
 #create project folder if it does not already exist
-if [[ -d "$projectsDirectory"/"$projectName" ]]
-    then
+if [[ -d "$projectsDirectory"/"$projectName" ]]; then
     echo "Project with such a name already exist. Terminating..."
     exit 1
-    else
+else
     mkdir -p "$projectsDirectory"/"$projectName"
 fi
 printf "Project directory successfully created.\n\n"
@@ -82,15 +79,13 @@ printf "Adding precommit hook to repository... DONE.\n"
 
 #Enable user to add remote repository
 read -p "Do you want to track remote repository?[Y/n] " repoAnswer
-if [ "$repoAnswer" = "Y" ] || [ "$repoAnswer" = "y" ] || [ "$repoAnswer" = "" ]
-then
-read -p "Feed me with link to the repository: (press q to quit) " repoLink
+if [ "$repoAnswer" = "Y" ] || [ "$repoAnswer" = "y" ] || [ "$repoAnswer" = "" ]; then
+    read -p "Feed me with link to the repository: (press q to quit) " repoLink
     #enable user to quit here
-    if [ "$repoLink" = "q" ]
-    then
-    echo "Quitting connection to remote repository"
+    if [ "$repoLink" = "q" ]; then
+        echo "Quitting connection to remote repository"
     else
-    git remote add origin $repoLink
+        git remote add origin $repoLink
     fi
 fi
 
@@ -101,9 +96,8 @@ git checkout -b development
 
 ##Open project in Intellij IDEA - works on Linux only. Uncomment and change idea.sh location in order to use it.
 #read -p "Do you want to open this project in Intellij?[Y/n] " ideAnswer
-#    if [ "$ideAnswer" = "Y" ] || [ "$ideAnswer" = "y" ] || [ "$ideAnswer" = "" ]
-#    then
-#    //snap/intellij-idea-community/95/bin/idea.sh pom.xml &
+#    if [ "$ideAnswer" = "Y" ] || [ "$ideAnswer" = "y" ] || [ "$ideAnswer" = "" ]; then
+#       //snap/intellij-idea-community/95/bin/idea.sh pom.xml &
 #fi
 
 printf "\nNEW PROJECT INITIALIZED SUCCESSFULLY"
