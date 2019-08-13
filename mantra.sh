@@ -4,6 +4,7 @@
 projectsDirectory=~/IdeaProjects
 author="Adam Michalak"
 mail="adam.michalak.dev@gmail.com"
+url="github.com\/michalakadam"
 group="dev.michalak.adam"
 groupProjectDirectory="dev/michalak/adam"
 
@@ -35,6 +36,9 @@ read -p "Feed me short project description: " description
 mkdir -p "$projectsDirectory"/"$projectName"/src/{main,test}/java/"$groupProjectDirectory"/"${projectName}"
 mkdir -p "$projectsDirectory"/"$projectName"/src/main/resources
 
+#add minimal pom.xml
+sed -e "s/GROUP_ID/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/PROJECT_DESCRIPTION/$description/g" -e "s/GROUP_URL/$url/g" -e "s/MAIN_CLASS_PATH/$group\.$projectName/g" ./templates/pom > "$projectsDirectory"/"$projectName"/pom.xml
+
 #add template main class of the program
 sed -e "s/PACKAGE_NAME/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/AUTHOR_NAME/$author/g" ./templates/mainclass > "$projectsDirectory"/"$projectName"/src/main/java/"$groupProjectDirectory"/$projectName.java
 
@@ -44,11 +48,6 @@ sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/To
 
 #Move to project directory
 cd "$projectsDirectory"/"$projectName"/
-
-
-#add minimal pom.xml
-set +x
-curl https://gist.githubusercontent.com/LIttleAncientForestKami/c9b185c123fc97f6022861f645766aa5/raw/45db276f570fcca357fbcf36b6209517c69c6427/pom.xml | sed s/pl.lafk/pl.michalak.adam/g | sed s/#APP/$projectName/g | sed s/#NAME/"$projectName"/g | sed s/#DESC/"$description"/g | sed s/lafk.pl/"github.com\/michalakadam"/g | sed s/"#FQN of your MainClass"/pl.michalak.adam.$projectName/g > pom.xml
 
 #create gitignore
 curl https://www.gitignore.io/api/java,intellij > .gitignore
