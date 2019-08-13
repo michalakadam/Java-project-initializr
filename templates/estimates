@@ -1,6 +1,6 @@
-# ProjectName
-##### Description
+# PROJECT_NAME
+##### DESCRIPTION
 ## Estimates:
 |Date  |Pessimistic|Realistic|Optimistic|
 |:----:|:--------|:--------|:---------|
-|Today|- project template generated<br/>|- pessimistic estimates fulfilled <br/>|- realistic estimates fulfilled<br/>|
+|DATE_TODAY|- project template generated<br/>|- pessimistic estimates fulfilled <br/>|- realistic estimates fulfilled<br/>|

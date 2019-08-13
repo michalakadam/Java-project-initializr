@@ -44,7 +44,7 @@ sed -e "s/PACKAGE_NAME/$group/g" -e "s/PROJECT_NAME/$projectName/g" -e "s/AUTHOR
 
 #Add estimates.md for future goal specification
 now=$(date +"%d-%m-%Y")
-sed -e "s/ProjectName/$projectName/g" -e "s/Description/$description/g" -e "s/Today/$now/g" ./templates/estimates > "$projectsDirectory"/"$projectName"/estimates.md
+sed -e "s/PROJECT_NAME/$projectName/g" -e "s/DESCRIPTION/$description/g" -e "s/DATE_TODAY/$now/g" ./templates/estimates > "$projectsDirectory"/"$projectName"/estimates.md
 
 #Move to project directory
 cd "$projectsDirectory"/"$projectName"/
