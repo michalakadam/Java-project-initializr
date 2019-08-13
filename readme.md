@@ -24,8 +24,7 @@
 Just open *mantra.sh* in your favourite terminal and edit DEFAULT VALUES section.<br/>
 Add your own name, mail and repo url.
 
-**Do you have any problems running this program?<br/>**
-**Do you see any way this project can be improved?<br/>**
+**Do you have any problems running this program? Do you see any way this project can be improved?<br/>**
  Please write an email to *adam.michalak.dev@gmail.com*
 
 
