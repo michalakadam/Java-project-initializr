@@ -19,6 +19,10 @@ while [[ "$correctInputFlag" -eq 0 ]]; do
     fi
 done
 
+projectNameLowerCase=$(echo "$projectName" | tr '[:upper:]' '[:lower:]')
+echo $projectName
+echo $projectNameLowerCase
+
 #create project folder if it does not already exist
 if [[ -d "$projectsDirectory"/"$projectName" ]]; then
     echo "Project with such a name already exist. Terminating..."
@@ -31,7 +35,7 @@ printf "Project directory successfully created.\n\n"
 read -p "Feed me short project description: " description
 
 #create tree-like maven structure
-mkdir -p "$projectsDirectory"/"$projectName"/src/{main,test}/java/"$groupProjectDirectory"/"${projectName}"
+mkdir -p "$projectsDirectory"/"$projectName"/src/{main,test}/java/"$groupProjectDirectory"/"${projectNameLowerCase}"
 mkdir -p "$projectsDirectory"/"$projectName"/src/main/resources
 printf "Standard maven folder structure of the project generated.\n"
 
