@@ -20,8 +20,6 @@ while [[ "$correctInputFlag" -eq 0 ]]; do
 done
 
 projectNameLowerCase=$(echo "$projectName" | tr '[:upper:]' '[:lower:]')
-echo $projectName
-echo $projectNameLowerCase
 
 #create project folder if it does not already exist
 if [[ -d "$projectsDirectory"/"$projectName" ]]; then
