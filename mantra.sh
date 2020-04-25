@@ -74,6 +74,7 @@ git init
 #add git precommit hook in git repository
 rm .git/hooks/pre-commit.sample
 curl https://raw.githubusercontent.com/michalakadam/GitHook/master/precommit.sh > .git/hooks/pre-commit
+chmod u+x .git/hooks/pre-commit
 printf "Adding precommit hook to repository... DONE.\n"
 
 #Enable user to add remote repository
